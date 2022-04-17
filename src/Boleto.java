@@ -96,4 +96,27 @@ public class Boleto {
     public void setContaBancaria(String contaBancaria) {
         this.contaBancaria = contaBancaria;
     }
+
+    @Override
+    public String toString() {
+        String str = String.format("Id: %10d Banco: %3s", id, codBanco);
+        String ag = "";
+        if(agencia != null && !agencia.isEmpty() && contaBancaria != null && !contaBancaria.isEmpty()){
+            ag = String.format(" Ag: %6s CC: %10s", agencia, contaBancaria);
+        }
+
+        str += ag + String.format(
+                " Venc: %s Pag: %s Valor: %10.2f",
+                ProcessarBoletos.FORMATO_DATA.format(dataVencimento),
+                ProcessarBoletos.FORMATO_DATA_HORA.format(dataPagamento), valor
+        );
+        if(multa > 0){
+            str += String.format(" Multa: %10.2f", multa);
+        }
+        if(juros > 0){
+            str += String.format(" Juros: %10.2f", juros);
+        }
+
+        return str;
+    }
 }
