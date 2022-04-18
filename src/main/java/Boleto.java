@@ -1,3 +1,5 @@
+package main.java;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -5,17 +7,13 @@ public class Boleto {
     private int id;
     private String codBanco;
     private LocalDate dataVencimento;
-    private LocalDate dataPagamento;
+    private LocalDateTime dataPagamento;
     private String cpfCliente;
     private double valor;
     private double multa;
     private double juros;
     private String agencia;
     private String contaBancaria;
-
-    public Boleto(){
-
-    }
 
     public int getId() {
         return id;
@@ -41,11 +39,11 @@ public class Boleto {
         this.dataVencimento = dataVencimento;
     }
 
-    public LocalDate getDataPagamento() {
+    public LocalDateTime getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(LocalDate dataPagamento) {
+    public void setDataPagamento(LocalDateTime dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
@@ -97,6 +95,11 @@ public class Boleto {
         this.contaBancaria = contaBancaria;
     }
 
+    /**
+     * Formata os dados do boleto para ser usado como String ou impresso.
+     * Assim, podemos fazer System.out.println(boleto) e exibir os dados formatados adequadamente.
+     * @return
+     */
     @Override
     public String toString() {
         String str = String.format("Id: %10d Banco: %3s", id, codBanco);
@@ -107,12 +110,12 @@ public class Boleto {
 
         str += ag + String.format(
                 " Venc: %s Pag: %s Valor: %10.2f",
-                LeituraRetorno.FORMATO_DATA.format(dataVencimento),
-                LeituraRetorno.FORMATO_DATA.format(dataPagamento), valor
-        );
+                ProcessarBoletos.FORMATO_DATA.format(dataVencimento),
+                ProcessarBoletos.FORMATO_DATA_HORA.format(dataPagamento), valor);
         if(multa > 0){
             str += String.format(" Multa: %10.2f", multa);
         }
+
         if(juros > 0){
             str += String.format(" Juros: %10.2f", juros);
         }
