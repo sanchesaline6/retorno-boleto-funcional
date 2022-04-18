@@ -5,7 +5,7 @@ public class Boleto {
     private int id;
     private String codBanco;
     private LocalDate dataVencimento;
-    private LocalDateTime dataPagamento;
+    private LocalDate dataPagamento;
     private String cpfCliente;
     private double valor;
     private double multa;
@@ -41,11 +41,11 @@ public class Boleto {
         this.dataVencimento = dataVencimento;
     }
 
-    public LocalDateTime getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(LocalDateTime dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
@@ -107,8 +107,8 @@ public class Boleto {
 
         str += ag + String.format(
                 " Venc: %s Pag: %s Valor: %10.2f",
-                ProcessarBoletos.FORMATO_DATA.format(dataVencimento),
-                ProcessarBoletos.FORMATO_DATA_HORA.format(dataPagamento), valor
+                LeituraRetorno.FORMATO_DATA.format(dataVencimento),
+                LeituraRetorno.FORMATO_DATA.format(dataPagamento), valor
         );
         if(multa > 0){
             str += String.format(" Multa: %10.2f", multa);

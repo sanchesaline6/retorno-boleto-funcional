@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeituraRetornoBancoBrasil implements LeituraRetorno{
+public class LeituraRetornoBancoBradesco implements LeituraRetorno{
     @Override
     public List<Boleto> lerArquivo(String nomeArquivo) {
         try{
@@ -21,14 +21,16 @@ public class LeituraRetornoBancoBrasil implements LeituraRetorno{
                 Boleto boleto = new Boleto();
                 boleto.setId(Integer.parseInt(vetor[0]));
                 boleto.setCodBanco(vetor[1]);
+                boleto.setAgencia(vetor[2]);
+                boleto.setContaBancaria(vetor[3]);
 
-                boleto.setDataVencimento(LocalDate.parse(vetor[2], FORMATO_DATA));
-                boleto.setDataPagamento(LocalDate.parse(vetor[3], FORMATO_DATA));
+                boleto.setDataVencimento(LocalDate.parse(vetor[4], FORMATO_DATA));
+                boleto.setDataPagamento(LocalDate.from(LocalDateTime.parse(vetor[5], FORMATO_DATA_HORA)));
 
-                boleto.setCpfCliente(vetor[4]);
-                boleto.setValor(Double.parseDouble(vetor[5]));
-                boleto.setMulta(Double.parseDouble(vetor[6]));
-                boleto.setJuros(Double.parseDouble(vetor[7]));
+                boleto.setCpfCliente(vetor[6]);
+                boleto.setValor(Double.parseDouble(vetor[7]));
+                boleto.setMulta(Double.parseDouble(vetor[8]));
+                boleto.setJuros(Double.parseDouble(vetor[9]));
 
                 boletos.add(boleto);
             }
